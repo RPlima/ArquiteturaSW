@@ -21,5 +21,10 @@ namespace ArquiteturaSW.Models
         public int IdEstilo { get; set; }
 
         public Estilo Estilo { get; set; }
+
+        public int IdTipo { get; set; }
+
+        public Tipo Tipo { get; set; }
+
     }
 }

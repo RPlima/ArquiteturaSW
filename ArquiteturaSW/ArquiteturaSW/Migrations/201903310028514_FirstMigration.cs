@@ -24,17 +24,32 @@ namespace ArquiteturaSW.Migrations
                         NomeMovel = c.String(nullable: false),
                         Imagem = c.String(),
                         IdEstilo = c.Int(nullable: false),
+                        IdTipo = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.IdMovel)
                 .ForeignKey("dbo.Estilo", t => t.IdEstilo, cascadeDelete: true)
-                .Index(t => t.IdEstilo);
+                .ForeignKey("dbo.Tipo", t => t.IdTipo, cascadeDelete: true)
+                .Index(t => t.IdEstilo)
+                .Index(t => t.IdTipo);
+            
+            CreateTable(
+                "dbo.Tipo",
+                c => new
+                    {
+                        IdTipo = c.Int(nullable: false, identity: true),
+                        NomeTipo = c.String(),
+                    })
+                .PrimaryKey(t => t.IdTipo);
             
         }
         
         public override void Down()
         {
+            DropForeignKey("dbo.Movel", "IdTipo", "dbo.Tipo");
             DropForeignKey("dbo.Movel", "IdEstilo", "dbo.Estilo");
+            DropIndex("dbo.Movel", new[] { "IdTipo" });
             DropIndex("dbo.Movel", new[] { "IdEstilo" });
+            DropTable("dbo.Tipo");
             DropTable("dbo.Movel");
             DropTable("dbo.Estilo");
         }

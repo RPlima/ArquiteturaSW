@@ -12,7 +12,7 @@ namespace ArquiteturaSW.Models
 
         public DbSet<Movel> Moveis { get; set; }
         public DbSet<Estilo> Estilos { get; set; }
-
+        public DbSet<Tipo> Tipos { get; set; }
 
 
     }

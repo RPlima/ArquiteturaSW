@@ -7,18 +7,20 @@ using System.Web;
 
 namespace ArquiteturaSW.DAL
 {
-    public class EstiloDAL : IEstiloDAL
+    public class EstiloDAL 
     {
-        private readonly Context ctx =  Singleton.Singleton.GetInstance();
+        private static readonly Context ctx =  Singleton.Singleton.GetInstance();
 
-        public Estilo BuscarEstilo(int id)
+        public static Estilo BuscarEstilo(int id)
         {
             return ctx.Estilos.FirstOrDefault(x => x.IdEstilo == id);
         }
 
-        public List<Estilo> BuscarEstilos()
+        public static List<Estilo> BuscarEstilos()
         {
             return ctx.Estilos.ToList();
         }
+
+
     }
 }

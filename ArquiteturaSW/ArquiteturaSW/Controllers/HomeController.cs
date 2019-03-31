@@ -11,20 +11,23 @@ namespace ArquiteturaSW.Controllers
 {
     public class HomeController : Controller
     {
-        //private readonly IMovelDAL Imovel;
-        //private readonly IEstiloDAL Iestilo;
-
-        //private HomeController(IEstiloDAL Iestilo, IMovelDAL Imovel)
-        //{
-        //    this.Iestilo = Iestilo;
-        //    this.Imovel =Imovel;
-        //}
 
         public ActionResult Index()
         {
-            //ViewBag.EstiloId = new SelectList(Iestilo.BuscarEstilos(), "IdEstilo", "NomeEstilo");
-            //ViewBag.MovelId = new SelectList(Imovel.BuscarMoveis(), "IdMovel", "NomeMovel");
+            ViewBag.IdEstilo = new SelectList(EstiloDAL.BuscarEstilos(), "IdEstilo", "NomeEstilo");
+            ViewBag.IdTipo = new SelectList(TipoDAL.BuscarTipos(), "IdTipo", "NomeTipo");
+            ViewBag.EstadoImage = false;
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Index(int IdEstilo, int IdTipo)
+        {
+            ViewBag.EstadoImage = true;
+            ViewBag.IdEstilo = new SelectList(EstiloDAL.BuscarEstilos(), "IdEstilo", "NomeEstilo");
+            ViewBag.IdTipo = new SelectList(TipoDAL.BuscarTipos(), "IdTipo", "NomeTipo");
+
+            return View(MovelDAL.BuscarMovelPorEstiloETipo(IdEstilo,IdTipo));
         }
     }
 }

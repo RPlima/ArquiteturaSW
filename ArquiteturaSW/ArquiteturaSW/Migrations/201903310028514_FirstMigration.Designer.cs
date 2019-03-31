@@ -13,7 +13,7 @@ namespace ArquiteturaSW.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201903302047015_FirstMigration"; }
+            get { return "201903310028514_FirstMigration"; }
         }
         
         string IMigrationMetadata.Source

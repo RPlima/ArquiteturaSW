@@ -7,18 +7,23 @@ using System.Web;
 
 namespace ArquiteturaSW.DAL
 {
-    public class MovelDAL : IMovelDAL
+    public class MovelDAL 
     {
 
-        private readonly Context ctx = Singleton.Singleton.GetInstance();
-        public List<Movel> BuscarMoveis()
+        private static readonly Context ctx = Singleton.Singleton.GetInstance();
+        public static List<Movel> BuscarMoveis()
         {
             return ctx.Moveis.ToList();
         }
 
-        public Movel BuscarMovel(int id)
+        public static Movel BuscarMovel(int id)
         {
             return ctx.Moveis.FirstOrDefault(x => x.IdMovel == id);
+        }
+
+        public static Movel BuscarMovelPorEstiloETipo(int IdEstilo, int IdTipo)
+        {
+            return ctx.Moveis.Where(x =>  x.IdTipo == IdTipo && x.IdEstilo == IdEstilo).FirstOrDefault();
         }
     }
 }
